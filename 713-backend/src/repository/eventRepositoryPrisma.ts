@@ -15,12 +15,28 @@ export function getAllEvents() {
   return prisma.event.findMany();
 }
 
+// export function getEventById(id: number) {
+//   return prisma.event.findUnique({
+//     where: { id },
+//     omit: {
+//       organizerId: true
+//     }
+//   });
+// }
+
 export function getEventById(id: number) {
   return prisma.event.findUnique({
     where: { id },
-    omit: {
-      organizerId: true
-    }
+    select: {
+      id: true,
+      category: true,
+      title: true,
+      description: true,
+      location: true,
+      date: true,
+      time: true,
+      organizerId: false, // Exclude organizerId
+    },
   });
 }
 

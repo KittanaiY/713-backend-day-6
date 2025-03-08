@@ -1,21 +1,33 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import type {Event } from '@/types'
+
+defineProps<{ event: Event }>()
+</script>
 
 <template>
-  <div class="event-class">
-    <h1>This is an event page</h1>
-  </div>
+  <RouterLink class="event-link":to="{name: 'event-detail-view', params: { id: event.id}}">
+    <div class="event-card">
+      <h2>{{ event.title }}</h2>
+      <p>{{ event.description }}</p>
+      <span>@{{ event.time }} on {{ event.date }}</span>
+    </div>
+  </RouterLink>
 </template>
 
 <style scoped>
 .event-card {
   padding: 20px;
-  width: 250px;
+  width: 450px;
   cursor: pointer;
-  border: 1px solid #39495c;
+  border: 2px solid #0dca6c;
   margin-bottom: 18px;
 }
 .event-card:hover{
   transform: scale(1.01);
-  box-shadow: 0 3px 12px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 3px 12px 0 rgba(255, 255, 255, 0.2);
+}
+.event-link {
+  text-decoration: none;
+  color: inherit;
 }
 </style>
