@@ -4,6 +4,7 @@ import eventService from '@/services/EventService';
 import {ref, computed, watchEffect} from 'vue'
 import type {Event} from '@/types'
 const events = ref<Event[]>([])
+const totalEvents = ref(0)
 
 interface EventResponse {
   data: Event[]
@@ -15,12 +16,17 @@ interface Props {
 
 const props = defineProps<Props>()
 const page = computed(() => props.page)
+const hasNextPage = computed(() => {
+  const totalPages = Math.ceil(totalEvents.value / 2)
+  return page.value < totalPages
+})
 
 watchEffect(() => {
   eventService
     .getEvents(page.value, 2)
     .then((response) => {
       events.value = response.data
+      totalEvents.value = response.headers['x-total-count']
     })
     .catch((error) => {
       console.error('There was an error!', error)
@@ -45,7 +51,8 @@ eventService.getEvents(page.value, 2).then((response) => {
       <RouterLink
       id="page-next"
       :to="{name: 'event-list-view', query: {page: page +1}}"
-      rel="next">Next Page</RouterLink>
+      rel="next"
+      v-if="hasNextPage">Next Page</RouterLink>
     </div>
   </div>
 </template>
