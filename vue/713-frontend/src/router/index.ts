@@ -5,6 +5,7 @@ import EventRegisterView from '@/views/event/RegisterView.vue'
 import EventEditView from '@/views/event/EditView.vue'
 import EventListView from '@/views/EventListView.vue'
 import EventService from '@/services/EventService'
+import NotFoundView from '@/views/NotFoundView.vue'
 
 const routes = [
   {
@@ -52,6 +53,12 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import('../views/AboutView.vue'),
   },
+  {
+    path:'/404/:resource',
+    name: '404-resource-view',
+    component: NotFoundView,
+    props:true,
+  }
 ]
 
 const router = createRouter({

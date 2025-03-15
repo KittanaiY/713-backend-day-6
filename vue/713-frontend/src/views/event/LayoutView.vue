@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import EventService from '@/services/EventService';
+import { useRouter } from 'vue-router'
 import { ref, onMounted } from 'vue';
 import type { Event } from '@/types';
 
@@ -7,6 +8,7 @@ const props = defineProps<{
   id: string
 }>()
 const event = ref<Event | null>(null);
+const router= useRouter()
 
 onMounted(() => {
   EventService.getEvent(parseInt(props.id))
@@ -15,6 +17,7 @@ onMounted(() => {
   })
   .catch((error) => {
     console.error('There was an error!', error);
+    router.push({ name: '404-resource-view', params: { resource: 'event'}})
   });
 })
 
