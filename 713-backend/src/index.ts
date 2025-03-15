@@ -8,7 +8,7 @@ dotenv.config();
 console.log(process.env.DATABASE_URL);
 import { uploadFile } from './services/uploadFileService';
 const app = express();
-const allowedOrigins = ['http://localhost:5173'];
+const allowedOrigins = ['http://localhost:5173','https://713-2024-frontend-example.vercel.app'];
 
 const options: cors.CorsOptions = {
   origin: allowedOrigins

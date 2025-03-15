@@ -6,6 +6,7 @@ import EventEditView from '@/views/event/EditView.vue'
 import EventListView from '@/views/EventListView.vue'
 import EventService from '@/services/EventService'
 import NotFoundView from '@/views/NotFoundView.vue'
+import NetworkErrorView from '@/views/NetworkErrorView.vue'
 
 const routes = [
   {
@@ -52,6 +53,11 @@ const routes = [
     // this generates a separate chunk (About.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import('../views/AboutView.vue'),
+  },
+  {
+    path: '/network-error',
+    name: 'network-error-view',
+    component: NetworkErrorView,
   },
   {
     path:'/404/:resource',
