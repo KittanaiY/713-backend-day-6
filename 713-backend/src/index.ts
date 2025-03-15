@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import eventRoute from './routes/eventRoute';
 import cors from 'cors';
 dotenv.config();
-
+console.log(process.env.DATABASE_URL);
 import { uploadFile } from './services/uploadFileService';
 const app = express();
 const allowedOrigins = ['http://localhost:5173'];

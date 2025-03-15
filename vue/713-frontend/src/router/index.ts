@@ -19,11 +19,10 @@ const routes = [
     path: '/event/:id',
     name: 'event-layout-view',
     component: EventLayoutView,
-    props: async (route) => {
-      const id = route.params.id
-      const event = await EventService.getEvent(id).then(response => response.data)
-      return { id, event }
-    },
+    props: (route) => ({
+      id: route.params.id,
+      event: EventService.getEvent(route.params.id), // Fetch event by ID
+    }),
     children: [
       {
         path: '',
